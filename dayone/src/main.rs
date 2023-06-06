@@ -5,7 +5,7 @@ struct Elf {
     calories: i32,
 }
 
-fn parse_line(items: std::str::Split<'_, &str>) -> Vec<Elf>  {
+fn parse_lines(items: std::str::Split<'_, &str>) -> Vec<Elf>  {
     let mut elfs: Vec<Elf> = Vec::new();
     let mut items_to_clear: Vec<i32> = Vec::new();
 
@@ -58,7 +58,7 @@ fn part_two(elfs: &Vec<Elf>) {
 
 fn main() {
     let items = fs::read_to_string("./src/day1.input").expect("file not found");
-    let elfs = parse_line(items.split("\n"));
+    let elfs = parse_lines(items.split("\n"));
 
     part_one(&elfs);
     part_two(&elfs);
