@@ -1,6 +1,6 @@
 use std::{fs, collections::HashMap};
 
-fn parse_lines(items: std::str::Split<'_, &str>) {
+fn parse_lines(items: std::str::Split<'_, char>) {
     let mut total_one: i32 = 0;
     let mut total_two: i32 = 0;
 
@@ -37,5 +37,5 @@ fn parse_lines(items: std::str::Split<'_, &str>) {
 
 fn main() {
     let data = fs::read_to_string("./src/day2.input").expect("Error reading file");
-    parse_lines(data.split("\n"));
+    parse_lines(data.split('\n'));
 }
