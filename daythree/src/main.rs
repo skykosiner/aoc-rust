@@ -11,7 +11,7 @@ fn get_int_value(ch: char) -> i32 {
     }
 }
 
-fn parse_lines(lines: std::str::Split<'_, &str> ) {
+fn part_one(lines: std::str::Split<'_, &str> ) {
     let mut chars: Vec<i32> = Vec::new();
     for line in lines {
         if line == "" {
@@ -27,6 +27,7 @@ fn parse_lines(lines: std::str::Split<'_, &str> ) {
                     if !seen {
                         chars.push(get_int_value(char));
                         seen = true;
+                        break
                     }
                 }
             }
@@ -35,7 +36,13 @@ fn parse_lines(lines: std::str::Split<'_, &str> ) {
     }
 }
 
+fn part_two(lines: std::str::Split<'_, &str>,) {
+    for line in lines {
+    }
+}
+
 fn main() {
-    let lines = fs::read_to_string("./src/day3.input").expect("Erorr reading file");
-    parse_lines(lines.split("\n"));
+    let lines = fs::read_to_string("./src/day3.test").expect("Erorr reading file");
+    part_one(lines.split("\n"));
+    part_two(lines.split("\n"));
 }

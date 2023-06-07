@@ -27,39 +27,22 @@ fn parse_lines(items: std::str::Split<'_, &str>) -> Vec<Elf>  {
     return elfs;
 }
 
-fn part_one(elfs: &Vec<Elf>) {
-    let mut largest_int: i32 = 0;
-
-    for elf in elfs {
-        if elf.calories > largest_int {
-            largest_int = elf.calories;
-        };
-    };
-
-    println!("{}", largest_int);
-}
-
-fn part_two(elfs: &Vec<Elf>) {
-    let mut output: i32 = 0;
+fn solve(elfs: &Vec<Elf>, nuber_to_take: usize) {
     let mut numbers: Vec<i32> = Vec::new();
-
     for elf in elfs {
         numbers.push(elf.calories);
         numbers.sort();
-    };
+    }
 
-    let last_three = numbers.iter().rev().take(3);
-    for last in last_three {
-        output += last;
-    };
-
-    println!("{}", output);
+    println!("{}", numbers.iter().rev().take(nuber_to_take).sum::<i32>());
 }
 
 fn main() {
     let items = fs::read_to_string("./src/day1.input").expect("file not found");
     let elfs = parse_lines(items.split("\n"));
 
-    part_one(&elfs);
-    part_two(&elfs);
+    // Part 1
+    solve(&elfs, 1);
+    // Part 2
+    solve(&elfs, 3);
 }
