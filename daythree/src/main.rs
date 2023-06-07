@@ -1,14 +1,15 @@
 use std::{fs};
 
 fn get_int_value(ch: char) -> i32 {
-    let ascii = ch as i32;
+    let ascii_char = ch as i32;
+
     // Upper case
-    if ascii <= 65 || ascii <= 90 {
-        return ascii - 38;
-    } else {
-        // Lower case
-        return ascii - 96;
+    if ascii_char <= 65 || ascii_char <= 90 {
+        return ascii_char - 38;
     }
+
+    // Lower case
+    return ascii_char - 96;
 }
 
 fn part_one(lines: std::str::Split<'_, &str> ) {
@@ -37,12 +38,36 @@ fn part_one(lines: std::str::Split<'_, &str> ) {
 }
 
 fn part_two(lines: std::str::Split<'_, &str>,) {
+    let mut items: Vec<&str> = Vec::new();
+    let mut chars: Vec<i32> = Vec::new();
+
     for line in lines {
+        items.push(line);
+    }
+
+    for chunk in items.chunks_exact(3) {
+        let mut seen: bool = false;
+        let (chunk1, chunk2, chunk3): (&str, &str, &str) = (chunk[0], chunk[1], chunk[2]);
+        for char1 in chunk1.chars() {
+            for char2 in chunk2.chars() {
+                for char3 in chunk3.chars() {
+                    if !seen {
+                        if char1 == char2 && char2 == char3 {
+                            chars.push(get_int_value(char1));
+                            seen = true;
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        println!("{}", chars.iter().sum::<i32>());
     }
 }
 
+
 fn main() {
-    let lines = fs::read_to_string("./src/day3.test").expect("Erorr reading file");
+    let lines = fs::read_to_string("./src/day3.input").expect("Erorr reading file");
     part_one(lines.split("\n"));
     part_two(lines.split("\n"));
 }
