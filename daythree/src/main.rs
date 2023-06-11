@@ -1,4 +1,4 @@
-use std::{fs};
+use std::fs;
 
 fn get_int_value(ch: char) -> i32 {
     let ascii_char = ch as i32;
